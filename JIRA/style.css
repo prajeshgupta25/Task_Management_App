@@ -2,6 +2,7 @@
 *{
    box-sizing: border-box;
 }
+
 body{
    margin: 0;
 }
@@ -27,6 +28,7 @@ body{
 
 .filters,.action_button{
    border: 1px solid;
+   border-radius: 0.5rem;
    display: inline-block;
    height: 50%;
    background-color: #636e72;
@@ -49,7 +51,8 @@ body{
 }
 
 .filter:hover{
-   background-color: #dfe6e9
+   background-color: #dfe6e9;
+   border-radius: 0.5rem;
 }
 
 .filter div{
@@ -93,6 +96,7 @@ body{
 
 .add:hover,.delete:hover{
    background-color: #dfe6e9;
+   border-radius: 0.5rem;
 }
 
 .material-icons{
@@ -102,7 +106,6 @@ body{
 .modal{
    height: 20rem;
    width: 30rem;
-   /* border: 1px solid; */
    background-color: azure;
    position: fixed;
    top: 20vh;
@@ -114,39 +117,48 @@ body{
 .task-section{
    height: 100%;
    width: 70%;
-   border: 2px solid;
    display: flex;
    justify-content: center;
    align-items: center;
+   background-color: #dcdde1;
 }
 
 .task-inner-container{
-   height: 90%;
-   width: 90%;
-   border: 1px solid;
+   height: 80%;
+   width: 80%;
+   background-color: white;
+   outline: none;
+   font-size: 1.4rem;
+   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+   overflow: auto;
+   padding: 10px;
 }
 
 .modal-priority-section{
    height: 100%;
    width: 30%;
-   border: 2px solid;
    display: flex;
    justify-content: center;
    align-items: center  ;
+   background-color: #636e72;;
 }
 
 .priority-inner-container{
-   height: 80%;
+   height: 90%;
    width: 60%;
-   border: 1px solid;
    display: flex;
+   flex-direction: column ;
    align-items: center;
-   flex-direction: column;
    justify-content: space-evenly;
+   background-color: white;
 }
 
 .modal-priority{
    width: 80%;;
    height: 22%;
-   border: 1px solid;
+}
+
+.modal-priority:hover{
+   border: 3px solid;
+   border-color: white;
 }
