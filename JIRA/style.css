@@ -159,6 +159,10 @@ body{
 }
 
 .modal-priority:hover{
-   border: 3px solid;
-   border-color: white;
+   border: 5px solid;
+   border-color: #a4b0be;
+}
+
+.selected{
+   border: 5px solid #a4b0be;
 }
