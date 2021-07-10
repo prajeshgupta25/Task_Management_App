@@ -24,6 +24,9 @@ body{
 .grid{
    background-color: lavenderblush;
    height: 85vh;
+   flex-wrap: wrap;
+   justify-content: space-evenly;
+   display: flex;
 }
 
 .filters,.action_button{
@@ -37,7 +40,7 @@ body{
 }
 
 .filters{
-   width: 16rem;
+   width: 14rem;
    display: flex;
 }
 
@@ -97,6 +100,12 @@ body{
 .add:hover,.delete:hover{
    background-color: #dfe6e9;
    border-radius: 0.5rem;
+}
+
+h1{
+   font-family: 'Electrolize', sans-serif;
+   font-size: 3rem;
+   text-align: right;
 }
 
 .material-icons{
@@ -173,6 +182,7 @@ body{
    height: 12rem;
    width: 20rem;
    border: 1px solid;
+   margin: 10PX;
 }
 
 .ticket-color{
