@@ -3,6 +3,8 @@ let body = document.querySelector("body");
 let dltbtn = document.querySelector(".delete");
 let grid =  document.querySelector(".grid");
 
+let colors = ["pink", "blue", "green", "black"];
+
 addbtn.addEventListener("click", function(e){
 
 let perModal = document.querySelector(".modal");
@@ -46,7 +48,7 @@ let perModal = document.querySelector(".modal");
 
    let taskInnerContainer = div.querySelector(".task-inner-container");
 
-   taskInnerContainer.addEventListener("keypress", function(e){
+   taskInnerContainer.addEventListener("keydown", function(e){
       if(e.key == "Enter"){ 
          let ticketDiv = document.createElement("div");
          ticketDiv.classList.add("ticket");
@@ -54,9 +56,22 @@ let perModal = document.querySelector(".modal");
          ticketDiv.innerHTML = ` <div class="ticket-color ${ticketColor}"></div>
                                  <div class="ticket-id">#pg2510</div>
                                  <div class="actual-task">${e.currentTarget.innerText}</div> `;
-
+         
+         let ticketColorDiv = ticketDiv.querySelector(".ticket-color");
+         ticketColorDiv.addEventListener("click", function(e){
+            let currColor = e.currentTarget.classList[1];
+            let pos = colors.findIndex(color => color === currColor);
+            pos++;
+            pos = pos % 4;
+            let newColor = colors[pos];
+            ticketColorDiv.classList.remove(currColor);
+            ticketColorDiv.classList.add(newColor);
+         });
          grid.append(ticketDiv);
          div.remove()
+      }
+      else if(e.key == "Escape"){
+         div.remove();
       }
    });
 
