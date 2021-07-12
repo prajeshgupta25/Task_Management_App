@@ -102,12 +102,6 @@ body{
    border-radius: 0.5rem;
 }
 
-h1{
-   font-family: 'Electrolize', sans-serif;
-   font-size: 3rem;
-   text-align: right;
-}
-
 .material-icons{
    font-size: 2rem!important;
    cursor: default;

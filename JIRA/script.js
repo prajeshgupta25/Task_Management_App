@@ -53,8 +53,10 @@ let perModal = document.querySelector(".modal");
          let ticketDiv = document.createElement("div");
          ticketDiv.classList.add("ticket");
 
+         let id = uid();
+
          ticketDiv.innerHTML = ` <div class="ticket-color ${ticketColor}"></div>
-                                 <div class="ticket-id">#pg2510</div>
+                                 <div class="ticket-id">#${id}</div>
                                  <div class="actual-task">${e.currentTarget.innerText}</div> `;
          
          let ticketColorDiv = ticketDiv.querySelector(".ticket-color");
