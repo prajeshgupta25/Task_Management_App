@@ -14,6 +14,8 @@ if(localStorage.getItem("AllTickets") == undefined){
    localStorage.setItem("AllTickets", allTickets);
 }
 
+loadTickets();
+
 dltbtn.addEventListener("click", function(e){
    if(e.currentTarget.classList.contains("delete-selected")){
       e.currentTarget.classList.remove("delete-selected");
@@ -167,6 +169,85 @@ addbtn.addEventListener("click", function(e){
 
 });
 
+
+function loadTickets(){
+   //1- fetch alltickets data
+
+   let allTickets = JSON.parse(localStorage.getItem("AllTickets"));
+
+   //2- create ticket ui for each ticket obj
+   //3- attach required listners
+   //4- add tickets in the grid section of ui
+   for(x in allTickets){
+      let currTicketId = x;
+      let singleTicketObj = allTickets[x];
+
+      let ticketDiv = document.createElement("div");
+         ticketDiv.classList.add("ticket");
+
+         ticketDiv.setAttribute("data-id", currTicketId);
+
+         ticketDiv.innerHTML = ` <div class="ticket-color ${singleTicketObj.color}" data-id = ${currTicketId}></div>
+                                 <div class="ticket-id">#${currTicketId}</div>
+                                 <div class="actual-task" contenteditable = "true" data-id = ${currTicketId}>${singleTicketObj.taskValue}</div> `;
+   
+      let ticketColorDiv = ticketDiv.querySelector(".ticket-color");
+
+      let actualTaskDiv = ticketDiv.querySelector(".actual-task");
+   
+      actualTaskDiv.addEventListener("input",function(e){
+         let updatedTask = e.currentTarget.innerText;
+         let currTicketId = e.currentTarget.getAttribute("data-id");
+   
+         let allTickets = JSON.parse(localStorage.getItem("AllTickets"));
+   
+         allTickets[currTicketId].taskValue = updatedTask;
+   
+         localStorage.setItem("AllTickets", JSON.stringify(allTickets));
+   
+      });
+   
+      ticketColorDiv.addEventListener("click", function(e){
+         let currTicketId = e.currentTarget.getAttribute("data-id");
+         let currColor = e.currentTarget.classList[1];
+         let pos = colors.findIndex(color => color === currColor);
+         pos++;
+         pos = pos % 4;
+         let newColor = colors[pos];
+   
+         //to bring all tickets; to update; to save it back
+         let allTickets = JSON.parse(localStorage.getItem("AllTickets"));
+   
+         allTickets[currTicketId].color = newColor;
+   
+         localStorage.setItem("AllTickets", JSON.stringify(allTickets));
+            
+   
+         ticketColorDiv.classList.remove(currColor);
+         ticketColorDiv.classList.add(newColor);
+      });
+   
+      ticketDiv.addEventListener("click", function(e){
+         if(deleteMode){
+   
+            let currTicketId = e.currentTarget.getAttribute("data-id");
+   
+            e.currentTarget.remove();
+   
+            let allTickets = JSON.parse(localStorage.getItem("AllTickets"));
+   
+            delete allTickets[currTicketId]; 
+   
+            localStorage.setItem("AllTickets", JSON.stringify(allTickets));
+   
+         }
+      });
+                              
+      grid.append(ticketDiv);
+   }
+
+   
+}
 
 
 
