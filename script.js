@@ -170,7 +170,14 @@ addbtn.addEventListener("click", function(e){
 });
 
 
-function loadTickets(){
+function loadTickets(color){
+
+   let ticketsOnUi = document.querySelectorAll(".ticket");
+
+   for (let i = 0; i < ticketsOnUi.length; i++) {
+      ticketsOnUi[i].remove();
+   }
+
    //1- fetch alltickets data
 
    let allTickets = JSON.parse(localStorage.getItem("AllTickets"));
@@ -178,9 +185,14 @@ function loadTickets(){
    //2- create ticket ui for each ticket obj
    //3- attach required listners
    //4- add tickets in the grid section of ui
-   for(x in allTickets){
+   for(x in allTickets){ 
+
       let currTicketId = x;
       let singleTicketObj = allTickets[x];
+
+      if (color) {
+         if (color != singleTicketObj.color) continue;
+      }
 
       let ticketDiv = document.createElement("div");
          ticketDiv.classList.add("ticket");
