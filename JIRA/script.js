@@ -72,29 +72,86 @@ addbtn.addEventListener("click", function(e){
 
    taskInnerContainer.addEventListener("keydown", function(e){
       if(e.key == "Enter"){ 
+         let id = uid();
+         let task = e.currentTarget.innerText;
+         //save data on local storage
+         
+         //step-1 to bring data from local storage
+         let allTickets = JSON.parse(localStorage.getItem("AllTickets"));
+
+         //step-2 to update the data in the local storage
+         
+         let ticketObj = {
+            color: ticketColor,
+            taskValue: task,   
+         };
+
+         allTickets[id] = ticketObj;
+
+         //step-3 to save the updated object back in local storage
+
+         localStorage.setItem("AllTickets",JSON.stringify(allTickets));
+
+
+         //to create ticket
          let ticketDiv = document.createElement("div");
          ticketDiv.classList.add("ticket");
 
-         let id = uid();
+         ticketDiv.setAttribute("data-id", id);
 
-         ticketDiv.innerHTML = ` <div class="ticket-color ${ticketColor}"></div>
+         ticketDiv.innerHTML = ` <div class="ticket-color ${ticketColor}" data-id = ${id}></div>
                                  <div class="ticket-id">#${id}</div>
-                                 <div class="actual-task">${e.currentTarget.innerText}</div> `;
+                                 <div class="actual-task" contenteditable = "true" data-id = ${id}>${task}</div> `;
          
          let ticketColorDiv = ticketDiv.querySelector(".ticket-color");
+         
+         let actualTaskDiv = ticketDiv.querySelector(".actual-task");
+
+         actualTaskDiv.addEventListener("input",function(e){
+            let updatedTask = e.currentTarget.innerText;
+            let currTicketId = e.currentTarget.getAttribute("data-id");
+
+            let allTickets = JSON.parse(localStorage.getItem("AllTickets"));
+
+            allTickets[currTicketId].taskValue = updatedTask;
+
+            localStorage.setItem("AllTickets", JSON.stringify(allTickets));
+
+         });
+
          ticketColorDiv.addEventListener("click", function(e){
+            let currTicketId = e.currentTarget.getAttribute("data-id");
             let currColor = e.currentTarget.classList[1];
             let pos = colors.findIndex(color => color === currColor);
             pos++;
             pos = pos % 4;
             let newColor = colors[pos];
+
+            //to bring all tickets; to update; to save it back
+            let allTickets = JSON.parse(localStorage.getItem("AllTickets"));
+
+            allTickets[currTicketId].color = newColor;
+
+            localStorage.setItem("AllTickets", JSON.stringify(allTickets));
+             
+
             ticketColorDiv.classList.remove(currColor);
             ticketColorDiv.classList.add(newColor);
          });
 
          ticketDiv.addEventListener("click", function(e){
             if(deleteMode){
+
+               let currTicketId = e.currentTarget.getAttribute("data-id");
+
                e.currentTarget.remove();
+
+               let allTickets = JSON.parse(localStorage.getItem("AllTickets"));
+
+               delete allTickets[currTicketId]; 
+
+               localStorage.setItem("AllTickets", JSON.stringify(allTickets));
+
             }
          });
 
