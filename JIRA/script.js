@@ -4,10 +4,32 @@ let dltbtn = document.querySelector(".delete");
 let grid =  document.querySelector(".grid");
 
 let colors = ["pink", "blue", "green", "black"];
+let deleteMode = false; 
+
+if(localStorage.getItem("AllTickets") == undefined){
+   let allTickets = {};
+
+   allTickets = JSON.stringify(allTickets);
+
+   localStorage.setItem("AllTickets", allTickets);
+}
+
+dltbtn.addEventListener("click", function(e){
+   if(e.currentTarget.classList.contains("delete-selected")){
+      e.currentTarget.classList.remove("delete-selected");
+      deleteMode = false;
+   }else{
+      e.currentTarget.classList.add("delete-selected");
+      deleteMode = true;
+   }
+}); 
 
 addbtn.addEventListener("click", function(e){
 
-let perModal = document.querySelector(".modal");
+   dltbtn.classList.remove("delete-selected");
+   deleteMode = false;
+
+   let perModal = document.querySelector(".modal");
 
    if(perModal!=null){
       return;
@@ -69,6 +91,13 @@ let perModal = document.querySelector(".modal");
             ticketColorDiv.classList.remove(currColor);
             ticketColorDiv.classList.add(newColor);
          });
+
+         ticketDiv.addEventListener("click", function(e){
+            if(deleteMode){
+               e.currentTarget.remove();
+            }
+         });
+
          grid.append(ticketDiv);
          div.remove()
       }
@@ -81,8 +110,7 @@ let perModal = document.querySelector(".modal");
 
 });
 
-dltbtn = addEventListener("click", function(e){
 
-    
-})
+
+
 

@@ -89,7 +89,6 @@ body{
 .add,.delete{
    height: 100%;
    width: 50%;
-   /* border: 1px solid; */
    font-size: 3rem;
    font-family: Arial, Helvetica, sans-serif;
    display: flex;
@@ -97,7 +96,9 @@ body{
    align-items: center;
 }
 
-.add:hover,.delete:hover{
+.add:hover,
+.delete:hover,
+.delete-selected{
    background-color: #dfe6e9;
    border-radius: 0.5rem;
 }
