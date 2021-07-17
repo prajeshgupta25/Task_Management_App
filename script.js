@@ -6,6 +6,17 @@ let grid =  document.querySelector(".grid");
 let colors = ["pink", "blue", "green", "black"];
 let deleteMode = false; 
 
+let allFiltersChilddren = document.querySelectorAll(".filter div");
+
+for(let i=0;i<allFiltersChilddren.length;i++){
+   allFiltersChilddren[i].addEventListener("click", function(e){
+      let filterCol = e.currentTarget.classList[0];
+      loadTickets(filterCol);
+   })
+}
+
+
+
 if(localStorage.getItem("AllTickets") == undefined){
    let allTickets = {};
 
