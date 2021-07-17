@@ -98,7 +98,8 @@ body{
 
 .add:hover,
 .delete:hover,
-.delete-selected{
+.delete-selected,
+.filter-selected{
    background-color: #dfe6e9;
    border-radius: 0.5rem;
 }

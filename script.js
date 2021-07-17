@@ -5,17 +5,24 @@ let grid =  document.querySelector(".grid");
 
 let colors = ["pink", "blue", "green", "black"];
 let deleteMode = false; 
+let filterMode = false;
 
 let allFiltersChilddren = document.querySelectorAll(".filter div");
 
 for(let i=0;i<allFiltersChilddren.length;i++){
    allFiltersChilddren[i].addEventListener("click", function(e){
-      let filterCol = e.currentTarget.classList[0];
-      loadTickets(filterCol);
+      if(e.currentTarget.classList.contains(".filter-selected")){
+         e.currentTarget.classList.remove(".filter-selected");
+         filterMode = false;
+         loadTickets();
+      }else{
+         e.currentTarget.classList.add(".filter-selected");
+         filterMode = true;
+         let filterCol = e.currentTarget.classList[0];
+         loadTickets(filterCol);
+      }
    })
 }
-
-
 
 if(localStorage.getItem("AllTickets") == undefined){
    let allTickets = {};
@@ -24,8 +31,6 @@ if(localStorage.getItem("AllTickets") == undefined){
 
    localStorage.setItem("AllTickets", allTickets);
 }
-
-loadTickets();
 
 dltbtn.addEventListener("click", function(e){
    if(e.currentTarget.classList.contains("delete-selected")){
