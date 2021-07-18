@@ -24,6 +24,8 @@ for(let i=0;i<allFiltersChilddren.length;i++){
    })
 }
 
+loadTickets();
+
 if(localStorage.getItem("AllTickets") == undefined){
    let allTickets = {};
 
